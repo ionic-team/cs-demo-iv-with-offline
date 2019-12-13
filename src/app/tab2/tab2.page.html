@@ -6,4 +6,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <div *ngFor="let i of info">
+    <h1>{{i.label}}</h1>
+    <p>{{i.data}}</p>
+  </div>
+</ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { dataKeys } from '../models/data-keys';
+import { DatabaseService } from '../services/database/database.service';
 
 @Component({
   selector: 'app-tab1',
@@ -11,12 +12,13 @@ export class Tab1Page implements OnInit {
   dataKey: string;
   data: string;
 
-  constructor() {}
+  constructor(private database: DatabaseService) {}
 
   async ngOnInit() {}
 
-  save() {
-    console.log('key:', this.dataKey);
-    console.log('data:', this.data);
+  async save() {
+    await this.database.set(this.dataKey, this.data);
+    this.dataKey = undefined;
+    this.data= undefined;
   }
 }

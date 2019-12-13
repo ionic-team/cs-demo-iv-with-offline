@@ -19,12 +19,9 @@
         <ion-label position="floating">Data</ion-label>
         <ion-input name="data" [(ngModel)]="data" #dataInput="ngModel" required></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-button expand="full" [disabled]="!dataForm.form.valid" (click)="save()">Save</ion-button>
+      </ion-item>
     </ion-list>
   </form>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button expand="full" [disabled]="!dataForm.form.valid" (click)="save()">Save</ion-button>
-  </ion-toolbar>
-</ion-footer>

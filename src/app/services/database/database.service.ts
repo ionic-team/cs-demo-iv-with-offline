@@ -19,6 +19,20 @@ export class DatabaseService {
     this.readyPromise = this.initializeSchema();
   }
 
+  async set(key: string, value: string): Promise<void> {
+    await this.ready();
+    this.handle.transaction(tx => {
+      tx.executeSql('DELETE from TestData WHERE id = ?', [key]);
+      tx.executeSql('INSERT INTO TestData (id, name) values (?, ?)', [key, value]);
+    });
+  }
+
+  async get(key: string): Promise<string> {
+    await this.ready();
+    const data = await this.handle.executeSql('SELECT name from TestData WHERE id = ?', [key]);
+    return data.rows.length ? data.rows.item(0).name : undefined;
+  }
+
   private async initializeSchema(): Promise<boolean> {
     await this.open();
     return this.handle
@@ -43,9 +57,7 @@ export class DatabaseService {
   private createTables(transaction: DbTransaction): void {
     const id = { name: 'id', type: 'TEXT PRIMARY KEY' };
     const name = { name: 'name', type: 'TEXT' };
-    transaction.executeSql(
-      this.createTableSQL('TestData', [id, name])
-    );
+    transaction.executeSql(this.createTableSQL('TestData', [id, name]));
   }
 
   private createTableSQL(name: string, columns: Array<Column>): string {

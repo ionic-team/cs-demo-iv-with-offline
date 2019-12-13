@@ -16,8 +16,9 @@ import { SQLite } from '@ionic-enterprise/offline-storage/ngx';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
-    StatusBar,
+    SQLite,
     SplashScreen,
+    StatusBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
