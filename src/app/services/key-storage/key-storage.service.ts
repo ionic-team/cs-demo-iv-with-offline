@@ -11,14 +11,21 @@ export class KeyStorageService extends IonicIdentityVaultUser<any> {
   private key = 'encryption-key';
 
   constructor(platform: Platform, private keyService: KeyService) {
-    super(platform, {
-      restoreSessionOnReady: false,
-      unlockOnReady: false,
-      unlockOnAccess: false,
-      lockAfter: 5000,
-      hideScreenOnBackground: false,
-      authMode: AuthMode.SecureStorage
-    });
+    super(
+      platform,
+      {
+        restoreSessionOnReady: false,
+        unlockOnReady: false,
+        unlockOnAccess: true,
+        lockAfter: 5000,
+        hideScreenOnBackground: false,
+        authMode: AuthMode.SecureStorage
+      },
+      {
+        username: 'MyDefaultUser',
+        vaultId: 'dbEncryptionKeyVault'
+      }
+    );
   }
 
   async get(): Promise<string> {
