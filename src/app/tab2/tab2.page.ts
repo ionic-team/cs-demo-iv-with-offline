@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { dataKeys } from '../models/data-keys';
 
 @Component({
   selector: 'app-tab2',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  keyList = dataKeys;
 
   constructor() {}
 
