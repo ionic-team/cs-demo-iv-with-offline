@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KeyService } from '../services/key/key.service';
+import { KeyStorageService } from '../services/key-storage/key-storage.service';
 
 @Component({
   selector: 'app-tab1',
@@ -9,9 +10,9 @@ import { KeyService } from '../services/key/key.service';
 export class Tab1Page implements OnInit {
   theKey: string;
 
-  constructor(private key: KeyService) {}
+  constructor(private keyStorage: KeyStorageService) {}
 
   async ngOnInit() {
-    this.theKey = await this.key.get();
+    this.theKey = await this.keyStorage.get();
   }
 }

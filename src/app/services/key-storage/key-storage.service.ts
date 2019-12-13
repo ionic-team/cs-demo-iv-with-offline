@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { AuthMode, IonicIdentityVaultUser } from '@ionic-enterprise/identity-vault';
+import { KeyService } from '../key/key.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { AuthMode, IonicIdentityVaultUser } from '@ionic-enterprise/identity-vau
 export class KeyStorageService extends IonicIdentityVaultUser<any> {
   private key = 'encryption-key';
 
-  constructor(platform: Platform) {
+  constructor(platform: Platform, private keyService: KeyService) {
     super(platform, {
       restoreSessionOnReady: false,
       unlockOnReady: false,
@@ -20,13 +21,23 @@ export class KeyStorageService extends IonicIdentityVaultUser<any> {
     });
   }
 
-  async set(value: string): Promise<void> {
-    const vault = await this.getVault();
-    await vault.storeValue(this.key, value);
-  }
-
   async get(): Promise<string> {
     const vault = await this.getVault();
-    return vault.getValue(this.key);
+    let dbKey = await vault.getValue(this.key);
+    if (!dbKey) {
+      dbKey = await this.keyService.get();
+      this.set(dbKey);
+    }
+    return dbKey;
+  }
+
+  async clear(): Promise<void> {
+    const vault = await this.getVault();
+    await vault.storeValue(this.key, undefined);
+  }
+
+  private async set(value: string): Promise<void> {
+    const vault = await this.getVault();
+    await vault.storeValue(this.key, value);
   }
 }
