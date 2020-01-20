@@ -1,4 +1,4 @@
-# Ionic Custoer Success Demo - Offline with Identity Vault
+# Ionic Customer Success Demo - Offline with Identity Vault
 
 The scenario being modeled here is one where the user has an encrypted database. The encryption key for the database is initially obtained from a backend API (simulated). At that time it is stored in Identity Vault using "Secure Storage" mode. The application only tries to obtain the encryption key from the API if it cannot be found in the vault.
 
