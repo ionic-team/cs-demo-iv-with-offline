@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { AuthMode, IonicIdentityVaultUser } from '@ionic-enterprise/identity-vault';
+import {
+  AuthMode,
+  IonicIdentityVaultUser,
+} from '@ionic-enterprise/identity-vault';
 import { KeyService } from '../key/key.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class KeyStorageService extends IonicIdentityVaultUser<any> {
   private key = 'encryption-key';
@@ -19,12 +22,12 @@ export class KeyStorageService extends IonicIdentityVaultUser<any> {
         unlockOnAccess: true,
         lockAfter: 5000,
         hideScreenOnBackground: false,
-        authMode: AuthMode.SecureStorage
+        authMode: AuthMode.SecureStorage,
       },
       {
         username: 'MyDefaultUser',
-        vaultId: 'dbEncryptionKeyVault'
-      }
+        vaultId: 'dbEncryptionKeyVault',
+      },
     );
   }
 

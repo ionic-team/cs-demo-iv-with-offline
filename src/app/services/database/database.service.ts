@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { SQLite, SQLiteObject, DbTransaction } from '@ionic-enterprise/offline-storage/ngx';
+import {
+  SQLite,
+  SQLiteObject,
+  DbTransaction,
+} from '@ionic-enterprise/offline-storage/ngx';
 import { KeyStorageService } from '../key-storage/key-storage.service';
 
 interface Column {
@@ -8,7 +12,7 @@ interface Column {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DatabaseService {
   private handle: SQLiteObject;
@@ -23,13 +27,19 @@ export class DatabaseService {
     await this.ready();
     this.handle.transaction(tx => {
       tx.executeSql('DELETE from TestData WHERE id = ?', [key]);
-      tx.executeSql('INSERT INTO TestData (id, name) values (?, ?)', [key, value]);
+      tx.executeSql('INSERT INTO TestData (id, name) values (?, ?)', [
+        key,
+        value,
+      ]);
     });
   }
 
   async get(key: string): Promise<string> {
     await this.ready();
-    const data = await this.handle.executeSql('SELECT name from TestData WHERE id = ?', [key]);
+    const data = await this.handle.executeSql(
+      'SELECT name from TestData WHERE id = ?',
+      [key],
+    );
     return data.rows.length ? data.rows.item(0).name : undefined;
   }
 
@@ -50,7 +60,7 @@ export class DatabaseService {
     this.handle = await this.sqlite.create({
       name: 'mytestdatabase.db',
       location: 'default',
-      key
+      key,
     });
   }
 

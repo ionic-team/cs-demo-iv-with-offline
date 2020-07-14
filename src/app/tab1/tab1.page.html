@@ -11,16 +11,33 @@
     <ion-list>
       <ion-item>
         <ion-label>Data Key</ion-label>
-        <ion-select name="data-key" [(ngModel)]="dataKey" #dataKeySelect="ngModel" required>
-          <ion-select-option *ngFor="let k of keyList" [value]="k.key">{{k.label}}</ion-select-option>
+        <ion-select
+          name="data-key"
+          [(ngModel)]="dataKey"
+          #dataKeySelect="ngModel"
+          required
+        >
+          <ion-select-option *ngFor="let k of keyList" [value]="k.key"
+            >{{k.label}}</ion-select-option
+          >
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Data</ion-label>
-        <ion-input name="data" [(ngModel)]="data" #dataInput="ngModel" required></ion-input>
+        <ion-input
+          name="data"
+          [(ngModel)]="data"
+          #dataInput="ngModel"
+          required
+        ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-button expand="full" [disabled]="!dataForm.form.valid" (click)="save()">Save</ion-button>
+        <ion-button
+          expand="full"
+          [disabled]="!dataForm.form.valid"
+          (click)="save()"
+          >Save</ion-button
+        >
       </ion-item>
     </ion-list>
   </form>

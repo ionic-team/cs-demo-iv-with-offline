@@ -5,7 +5,7 @@ import { DatabaseService } from '../services/database/database.service';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit {
   keyList = dataKeys;
@@ -19,6 +19,6 @@ export class Tab1Page implements OnInit {
   async save() {
     await this.database.set(this.dataKey, this.data);
     this.dataKey = undefined;
-    this.data= undefined;
+    this.data = undefined;
   }
 }
