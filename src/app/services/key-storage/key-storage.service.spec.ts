@@ -6,7 +6,7 @@ describe('VaultService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: KeyStorageService = TestBed.get(KeyStorageService);
+    const service: KeyStorageService = TestBed.inject(KeyStorageService);
     expect(service).toBeTruthy();
   });
 });
