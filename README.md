@@ -11,11 +11,13 @@ Follow all the normal steps:
 1. clone the repo
 1. install your own `.npmrc` file from one of your production projects
 1. `npm i`
-1. `ionic cordova run android` etc.
+1. `npm run build`
+1. `npx cap sync`
+1. `npx cap open ios` and/or `npx cap open android`
 
 This application takes advantage of a couple of `@ionic-enterprise` solutions. Thus you need to have purchased access to those solutions and have a valid enterprise key in order to try this application.
 
-## Setup
+## Significant Architecture
 
 Have a look at the `app.module.ts` file and note that the `SQLite` service needed to be provided. That is the only setup required.
 
